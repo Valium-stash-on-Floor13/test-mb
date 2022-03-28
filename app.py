@@ -21,7 +21,7 @@ def translate_lang():
         translator= Translator()
         s1= translator.translate("Chat With Me!", src="en", dest="code").text
         s2= translator.translate("Hi, I am Medbot and I'm here to help you!", src="en", dest="code").text
-    return render_template('home.html',s1=s1, s2=s2, lang_code=code, languages=lang)
+    return render_template('home.html',sen1=s1, sen2=s2, code=code, languages=lang)
 
 @app.route('/get')
 def get_bot_response():
