@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Home page</title>
+</head>
+<style>
+    *, *::after, *::before{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+    }
+    body{
+        overflow-x:hidden;
+        background: #222;
+        font-family: 'Montserrat', sans-serif;
+    }
+    a{
+        text-decoration: none;
+    }
+    ul{
+        list-style: none;
+    }
+    nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 15px 15px;
+        border-bottom: 1px #444 solid;
+    }
+    nav img{
+        height: 35px;
+        width: auto;
+        margin-right: 30px;
+    }
+    ul.nav-links{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .head{
+        color:#fff;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 17px;
+    }
+    .nav-links a, .nav-link{
+        color:#fff;
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        margin-right:10px;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 5px;
+    }
+    .nav-link:hover{
+        border-bottom: 2px solid #fff;
+    }
+   
+   .chat-window h2{
+       text-align: center;
+       font-size: 30px;
+       margin-top: 30px;
+       color:#ddd;
+       font-weight: 500;
+       margin-bottom: 25px;
+   }
+   .convo{
+    padding:30px 20px 0px 20px;
+   }
+   
+   .chat-box{
+       margin: 0 auto 10px auto;
+        width: 80vw;
+        height:55vh;
+        position: relative;
+        overflow-y: scroll;
+       overflow-x: hidden;
+       
+        background-image: linear-gradient(rgb(238, 238, 238),rgb(220, 245, 253));
+    }
+    p.user{
+        background: rgb(0, 22, 63);
+        color:#fff;
+       min-width:200px;
+        width:100%;
+        margin-bottom:30px;
+        max-width: 300px;
+        padding:10px 12px;
+        border-radius: 20px;
+display: block;
+margin-left:auto;
+        
+
+    }
+    p.bot{
+        background: rgb(7, 80, 216);
+        color:#fff;
+        min-width:200px;
+        width:100%;
+        margin-bottom:30px;
+        max-width: 300px;
+        padding:10px 12px;
+        border-radius: 20px;
+       
+    }
+    span{
+        color:rgb(255, 55, 55);
+    }
+    input{
+  
+        display: block;
+        width: 80vw;
+        margin: 0 auto;
+        padding:10px 15px;
+        font-size: 14px;
+        background: rgb(14, 14, 14);
+        color:#fff;
+        border:none;
+        
+    }
+    input.submit{
+    background: rgb(55, 92, 255);
+    font-weight: 500;
+    position: absolute;
+    top:0;
+ right:0;
+    z-index:4;
+    width:100px;
+  
+    }
+    .user-input{
+    position: relative;
+    width: 80vw;
+        margin: 0 auto;
+    }
+    @media screen and (max-width: 520px) {
+        nav img{
+        height: 20px;
+        width: auto;
+        margin-right: 20px;
+    }
+    .chat-window h2 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+
+    .head{
+        font-size:15px;
+        padding:0 20px;
+        margin-bottom: 15px;
+    }
+    .chat-box{
+     width:95vw;
+    } 
+    .nav-links a, .nav-link{
+        font-size: 14px;
+    }
+    input{
+     width: 80vw;
+    }
+    input.submit {
+    width:70px;
+    }
+    p.user{
+    font-size:13px;
+    margin-bottom:15px;
+    }
+    p.bot{
+    font-size:13px;
+    margin-bottom:15px;
+   }
+              
+}
+
+</style>
+<body>
+ <nav>
+     <img src="/static/logo.png" alt="Logo">
+     <ul class="nav-links">
+         <a href="{{ url_for('home_page') }}">
+             <li class="nav-link">Home</li>
+         </a>
+         <a href="{{  url_for('about_page')}}">
+             <li class="nav-link">About</li>
+         </a>
+       
+        
+     </ul>
+ </nav>
+<section class="chat-window">
+   
+                                                    
+    <h2> Languages{% for item in languages %}
+        <p>{{item['name']}}</p>
+        {% endfor %}   </h2>
+    <p class="head">Hi, I am <span>Dr. Medbot</span> and I'm here to help you!</p>
+    <div class="chat-box">
+        <div class="convo" id="convo">
+          
+          
+        </div> 
+    </div>
+    <div class="user-input" id="userInput">
+
+    <input type="text" placeholder="Enter Your Message Here" name="message" id="textInput">
+    <input type="submit" class="submit" value="Send" id="buttonInput">
+</div>
+
+</section>
+
+<script>
+    function getBotResponse(){
+        var rawText= $("#textInput").val();
+        var userHtml = '<p class="user"> '+rawText+ '</p>';
+        $("#textInput").val('');
+        $("#convo").append(userHtml);
+        document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
+        $.get("/get", { msg: rawText }).done(function(data) {
+        var botHtml = '<p class="bot">Bot: '+data+ '</p>';
+         $("#convo").append(botHtml);
+            document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+          var chatbot= document.querySelector(".chat-box");
+          chatbot.scrollTop = chatbot.scrollHeight;
+        }
+        
+        $("#textInput").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+        $("#buttonInput").click(function(){
+            getBotResponse();
+        })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>About</title>
+</head>
+<style>
+    *, *::after, *::before{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+    }
+    body{
+        background: #222;
+        font-family: 'Montserrat', sans-serif;
+    }
+    a{
+        text-decoration: none;
+    }
+    ul{
+        list-style: none;
+    }
+    nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 15px 15px;
+        border-bottom: 1px #444 solid;
+    }
+    span{
+        color:rgb(255, 55, 55);
+    }
+    nav img{
+        height: 35px;
+        width: auto;
+        margin-right: 30px;
+    }
+    ul.nav-links{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .nav-links a, .nav-link{
+        color:#fff;
+        font-size: 16px;
+        letter-spacing: 0.8px;
+        margin-right:10px;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 5px;
+    }
+    .nav-link:hover{
+        border-bottom: 2px solid #fff;
+    }
+   .about{
+       margin-top: 30px;
+       padding:20px 15px;
+   }
+   h2{
+       text-align: center;
+       font-size: 30px;
+       margin-top: 30px;
+       color:#ddd;
+       font-weight: 500;
+       margin-bottom: 25px;
+   }
+   .about p{
+       padding:20px;
+       color:#fff;
+       font-size: 14px;
+       letter-spacing: 0.5px;
+   }
+h3{
+    padding:20px;
+    color:rgb(231, 231, 231);
+ 
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    
+}
+li{
+  padding-left: 20px;
+    color:rgb(211, 211, 211);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    
+}
+.cyan li{
+    color:rgb(162, 193, 250);
+}
+@media screen and (max-width: 520px) {
+        nav img{
+        height: 20px;
+        width: auto;
+        margin-right: 20px;
+    }
+    .nav-links a, .nav-link{
+        font-size: 14px;
+    }
+    h2 {
+    text-align: center;
+    font-size: 26px;
+    padding:0 20px;
+    }
+}
+</style>
+<body>
+ <nav>
+     <img src="/static/logo.png" alt="Logo">
+     <ul class="nav-links">
+        <a href="{{ url_for('home_page') }}">
+            <li class="nav-link">Home</li>
+        </a>
+        <a href="{{  url_for('about_page')}}">
+            <li class="nav-link">About</li>
+        </a>
+     </ul>
+ </nav>
+ <section class="about">
+<h2>What <span> Dr Medbot</span> is, and what it does? </h2>
+<p>Dr Medbot is an <span>AI</span>  powered chatbot developed using python, flask and <span>machine learning libraries and algorithms</span> like nltk, tensorflow, tflearn, bag of words etc. It aims to provide trustable information by fetching the queries sent by users.</p>
+<h3><span>Tech Stack </span>  Used</h3>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>Python</li>
+    <li>Flask</li>
+    
+</ul>
+<h3> <span>Libraries/Modules</span>  Used</h3>
+<ul>
+    <li>Numpy</li>
+    <li>TensorFlow</li>
+    <li>NLTK</li>
+    <li>Tflearn</li>
+    <li>Beautiful Soup</li>
+    <li>Request</li>
+    
+</ul>
+</ul>
+<h3><span>Developed </span>  By</h3>
+<ul class="cyan">
+    <li>Vedang Shahane</li>
+     <li>Prathamesh Borse</li>
+    <li>Ashish Jundhare</li>
+    <li>Arvind Tatu</li>
+   
+   
+  
+</ul>
+
+</section>
+</body>
+
+</html>
