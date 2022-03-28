@@ -5,9 +5,10 @@ from bot import medbot
 @app.route("/")
 @app.route("/home")
 def home_page():
+    sen1="Chat with me!"
+    sen2="Hi, I am Medbot and I'm here to help you!"
     lang =[{"name": "English", "code": "en"}, {"name": "Hindi", "code": "hi"},{"name": "Spanish", "code": "es"},{"name": "German", "code": "de"}, {"name": "Chinese", "code": "zh-cn"}]
-
-    return render_template('home.html',languages= lang)
+    return render_template('home.html', languages=lang, sen1=sen1, sen2=sen2 )
 
 
 
