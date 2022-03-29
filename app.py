@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from googletrans import Translator
+ translator= Translator()
 app = Flask(__name__)
 from bot import medbot
 
@@ -20,7 +21,7 @@ def translate():
     print(data)
     data=str(data)
     print(data)
-    translator= Translator()
+   
     
     return jsonify(s1)
 
