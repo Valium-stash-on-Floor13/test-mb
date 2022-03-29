@@ -196,22 +196,27 @@ margin-left:auto;
      </ul>
  </nav>
 <section class="chat-window">
-    <h2>{{ sen1 }}</h2>
+    
+    <h2 id="sen1">Chat with me!</h2>
     
 
-    <p class="head">{{ sen2 }}</p> 
-      <form class="form-inline" action="/translate" method="post">
+    <p class="head">Hi, I am Medbot and I'm here to help you!</p> 
+     
+    <form id='postForm' method="POST">
         <div class="form-group">
          <label for="selectLang">Select Language</label>
-                  <select name="code" class="selectpicker">
-                    {% for item in languages %}
-                    <option value="{{ item['code'] }}">{{item['name']}}</option>
-                    {% endfor %}                                              
+                  <select id="language" name="code">
+                    <option value="en" selected>English</option>
+                    <option value="hi">Hindi</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <option value="zh-cn">Chinese</option>                                          
                   </select>
           </div>
-          <button type="submit" class="btn btn-default">Go</button>
+          <button type="submit" class="btn btn-default">Save</button>
         </div>
       </form>
+
     <div class="chat-box">
         <div class="convo" id="convo">
           
@@ -251,6 +256,27 @@ margin-left:auto;
             getBotResponse();
         })
 
+        document.getElementById("postForm").addEventListener('submit', getData);
+        function getData(e){
+            e.preventDefault();
+            // console.log($('#language').val());
+
+            var select = document.getElementById('language');
+            var cd = select.options[select.selectedIndex].value;
+            console.log("Code:"+cd);
+            var params ={code:cd}
+            var xhr= new XMLHttpRequest;
+            xhr.open('post', '/translate', true );
+            xhr.setRequestHeader('Content-type', 'application/json');
+
+            xhr.onload= function(){
+                console.log('Reached');
+                console.log(this.responseText);
+                document.getElementById("sen1").innerHTML= this.responseText;
+           
+            }
+            xhr.send(JSON.stringify(params));
+        }
 </script>
 </body>
 </html>
