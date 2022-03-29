@@ -19,12 +19,11 @@ def translate():
     if request.method == "POST":
         code= str(request.form["code"])
         translator= Translator()
-        print(hi)
-        s1= translator.translate("Chat With Me!", src="en", dest="code").text
-        s2= translator.translate("Hi, I am Medbot and I'm here to help you!", src="en", dest="code").text
-        return redirect("/home", sen1=s1, sen2=s2, code=code, languages=lang)
+        s1= translator.translate("Chat With Me!", src="en", dest=code).text
+        s2= translator.translate("Hi, I am Medbot and I'm here to help you!", src="en", dest=code).text
+        return redirect("/home", sen1=s1, sen2=s2, languages=lang)
     else:
-    return render_template('home.html',sen1="Chat with me!", sen2="Hi, I am Medbot and I'm here to help you!", code="en", languages=lang)
+        return render_template('home.html',sen1="Chat with me!", sen2="Hi, I am Medbot and I'm here to help you!", code="en", languages=lang)
 
 @app.route('/get')
 def get_bot_response():
