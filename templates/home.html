@@ -28,6 +28,28 @@
     ul{
         list-style: none;
     }
+    language {
+  color: #111;
+  background: white;
+  padding: 2px 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  margin-left: 13px;
+    }
+    form label{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    }
+    form{
+    text-align: center;
+margin-bottom: 20px;
+    }
     nav{
         display: flex;
         justify-content: space-around;
@@ -94,11 +116,25 @@
         max-width: 300px;
         padding:10px 12px;
         border-radius: 20px;
-display: block;
-margin-left:auto;
-        
-
+        display: block;
+        margin-left:auto;
     }
+    .btn.btn-default {
+        cursor: pointer;
+        transition: background 200ms ease;
+  background: #ff3131;
+  outline: none;
+  border: none;
+  padding: 3px 15px;
+  border-radius: 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 12px;
+}
+.btn.btn-default:hover{
+    background: rgb(223, 26, 26);
+}
     p.bot{
         background: rgb(7, 80, 216);
         color:#fff;
@@ -197,10 +233,10 @@ margin-left:auto;
  </nav>
 <section class="chat-window">
     
-    <h2 id="sen1">Chat with me!</h2>
+    <h2 id="sen1">Chat with me! Hi, I am Medbot and I'm here to help you!</h2>
     
 
-    <p class="head">Hi, I am Medbot and I'm here to help you!</p> 
+   
      
     <form id='postForm' method="POST">
         <div class="form-group">
@@ -212,8 +248,9 @@ margin-left:auto;
                     <option value="de">German</option>
                     <option value="zh-cn">Chinese</option>                                          
                   </select>
+                  <button type="submit" class="btn btn-default">Save</button>
           </div>
-          <button type="submit" class="btn btn-default">Save</button>
+          
         </div>
       </form>
 
@@ -272,8 +309,8 @@ margin-left:auto;
             xhr.onload= function(){
                 console.log('Reached');
                 console.log(this.responseText);
-                document.getElementById("sen1").innerHTML= this.responseText;
-           
+                document.getElementById("sen1").textContent= this.responseText;
+      
             }
             xhr.send(JSON.stringify(params));
         }
