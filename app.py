@@ -1,29 +1,28 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from googletrans import Translator
-
 app = Flask(__name__)
 from bot import medbot
 
 @app.route("/")
 @app.route("/home")
 def home_page():
-    sen1="Chat with me!"
-    sen2="Hi, I am Medbot and I'm here to help you!"
-    lang =[{"name": "English", "code": "en"}, {"name": "Hindi", "code": "hi"},{"name": "Spanish", "code": "es"},{"name": "German", "code": "de"}, {"name": "Chinese", "code": "zh-cn"}]
-    return render_template('home.html', languages=lang, sen1=sen1, sen2=sen2 )
+    return render_template('home.html')
 
-
-@app.route('/translate', methods=['POST', "GET"])
+app.route('/translate', methods=['POST', "GET"])
 def translate():
-    lang =[{"name": "English", "code": "en"}, {"name": "Hindi", "code": "hi"},{"name": "Spanish", "code": "es"},{"name": "German", "code": "de"}, {"name": "Chinese", "code": "zh-cn"}]
-    if request.method == "POST":
-        code= str(request.form["code"])
-        translator= Translator()
-        s1= translator.translate("Chat With Me!", src="en", dest=code).text
-        s2= translator.translate("Hi, I am Medbot and I'm here to help you!", src="en", dest=code).text
-        return redirect("/home", sen1=s1, sen2=s2, languages=lang)
-    else:
-        return render_template('home.html',sen1="Chat with me!", sen2="Hi, I am Medbot and I'm here to help you!", code="en", languages=lang)
+    data=request.json['code']
+    s1="Chat With Me!"
+    s1= translator.translate(s1, src="en", dest=data).text
+    print(s1)
+    s2="Hi, I am Medbot and I'm here to help you!"
+    s2= translator.translate(s2, src="en", dest=data).text
+    print(s2)
+    print(data)
+    data=str(data)
+    print(data)
+    translator= Translator()
+    
+    return jsonify(s1)
 
 @app.route('/get')
 def get_bot_response():
@@ -40,4 +39,4 @@ def about_page():
 
 if __name__ == "__main__":
     # turn debug mode off after production   
-    app.run()
+    app.run(debug=True)
