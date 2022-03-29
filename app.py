@@ -1,29 +1,27 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from googletrans import Translator
- translator= Translator()
+translator= Translator()
 app = Flask(__name__)
+app.secret_key="Hello"
 from bot import medbot
 
 @app.route("/")
 @app.route("/home")
 def home_page():
+    session['cd']='en'
     return render_template('home.html')
 
-@app.route('/translate', methods=['POST', "GET"])
+
+
+@app.route("/translate", methods=['POST', "GET"])
 def translate():
     data=request.json['code']
-    s1="Chat With Me!"
-    s1= translator.translate(s1, src="en", dest=data).text
-    print(s1)
-    s2="Hi, I am Medbot and I'm here to help you!"
-    s2= translator.translate(s2, src="en", dest=data).text
-    print(s2)
-    print(data)
-    data=str(data)
-    print(data)
    
-    
-    return jsonify(s1)
+    s1="Chat With Me! Hi, I am Medbot and I'm here to help you!"
+    s1= translator.translate(s1, src="en", dest=data).text
+    print("trans:",s1)
+   
+    return s1
 
 @app.route('/get')
 def get_bot_response():
