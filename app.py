@@ -8,7 +8,7 @@ from bot import medbot
 def home_page():
     return render_template('home.html')
 
-app.route('/translate', methods=['POST', "GET"])
+@app.route('/translate', methods=['POST', "GET"])
 def translate():
     data=request.json['code']
     s1="Chat With Me!"
